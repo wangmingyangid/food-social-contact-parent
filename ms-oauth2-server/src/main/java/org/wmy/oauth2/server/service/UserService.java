@@ -34,16 +34,16 @@ public class UserService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AssertUtil.isNotEmpty(username,"请输入用户名");
+        AssertUtil.isNotEmpty(username, "请输入用户名");
         Diners diners = dinersMapper.selectByAccountInfo(username);
-        if(diners == null){
+        if (diners == null) {
             throw new UsernameNotFoundException("用户名或密码错误，请重新输入");
         }
 
         //初始化登录认证对象
         SignInIdentity signInIdentity = new SignInIdentity();
         //拷贝属性
-        BeanUtils.copyProperties(diners,signInIdentity);
+        BeanUtils.copyProperties(diners, signInIdentity);
 
         return signInIdentity;
     }

@@ -34,6 +34,37 @@ spring:
           filters:
             - StripPrefix=1
 
+        - id: ms-follow
+          uri: lb://ms-follow
+          predicates:
+            - Path=/follow/**
+          filters:
+            - StripPrefix=1
+
+        - id: ms-feeds
+          uri: lb://ms-feeds
+          predicates:
+            - Path=/feeds/**
+          filters:
+            - StripPrefix=1
+
+        - id: ms-points
+          uri: lb://ms-points
+          predicates:
+            - Path=/points/**
+          filters:
+            - StripPrefix=1
+
+        - id: ms-restaurants
+          uri: lb://ms-restaurants
+          predicates:
+            - Path=/restaurants/**
+          filters:
+            - StripPrefix=1
+
+
+
+
 secure:
   ignore:
     urls: # 配置白名单路径
@@ -44,6 +75,7 @@ secure:
       - /diners/checkPhone
       - /diners/register
       - /seckill/add
+      - /restaurants/detail
 
 # 配置 Eureka Server 注册中心
 eureka:

@@ -9,9 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="commons" />
         <module name="ms-diners" />
+        <module name="ms-feeds" />
+        <module name="ms-follow" />
         <module name="ms-gateway" />
         <module name="ms-oauth2-server" />
+        <module name="ms-points" />
         <module name="ms-registry" />
+        <module name="ms-restaurants" />
         <module name="ms-seckill" />
       </profile>
     </annotationProcessing>

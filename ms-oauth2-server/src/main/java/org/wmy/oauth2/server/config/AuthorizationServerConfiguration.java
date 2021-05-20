@@ -20,6 +20,7 @@ import java.util.Map;
 /**
  * @author wmy
  * @create 2020-11-23 21:11
+ * 配置授权服务器
  */
 
 @Configuration
@@ -49,6 +50,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     /**
      * 配置令牌端点安全约束
+     *
      * @param security
      * @throws Exception
      */
@@ -62,6 +64,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     /**
      * 客户端配置--授权模型（这里用是是Password）
+     *
      * @param clients
      * @throws Exception
      */
@@ -77,6 +80,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     /**
      * 配置授权以及令牌的访问端点和令牌服务
+     *
      * @param endpoints
      * @throws Exception
      */
@@ -89,12 +93,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 //存储token 的地方
                 .tokenStore(redisTokenStore)
                 //令牌增强对象，增强返回结果
-                .tokenEnhancer((accessToken,authentication) ->{
+                .tokenEnhancer((accessToken, authentication) -> {
                     //获取登录用户的信息，然后设置
                     SignInIdentity signInIdentity = (SignInIdentity) authentication.getPrincipal();
                     LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-                    map.put("nickname",signInIdentity.getNickname());
-                    map.put("avatarUrl",signInIdentity.getAvatarUrl());
+                    map.put("nickname", signInIdentity.getNickname());
+                    map.put("avatarUrl", signInIdentity.getAvatarUrl());
                     DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) accessToken;
                     token.setAdditionalInformation(map);
                     return token;

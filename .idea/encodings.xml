@@ -4,9 +4,13 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/commons" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-diners" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-feeds" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-follow" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-gateway" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-oauth2-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-points" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-registry" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-restaurants" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-seckill" charset="UTF-8" />
   </component>
 </project>

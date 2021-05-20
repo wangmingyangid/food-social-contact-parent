@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  */
 
 @Component
-public class AuthGlobalFilter implements GlobalFilter,Ordered {
+public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
     @Resource
     private IgnoreUrlsConfig ignoreUrlsConfig;
@@ -33,6 +33,7 @@ public class AuthGlobalFilter implements GlobalFilter,Ordered {
 
     /**
      * 身份校验处理
+     *
      * @param exchange
      * @param chain
      * @return
@@ -44,20 +45,20 @@ public class AuthGlobalFilter implements GlobalFilter,Ordered {
         boolean flag = false;
         String path = exchange.getRequest().getURI().getPath();
         for (String url : ignoreUrlsConfig.getUrls()) {
-            if(pathMatcher.match(url,path)){
+            if (pathMatcher.match(url, path)) {
                 flag = true;
                 break;
             }
         }
         //白名单放行
-        if(flag){
+        if (flag) {
             return chain.filter(exchange);
         }
         //获取access_token
         String access_token = exchange.getRequest().getQueryParams().getFirst("access_token");
         //判断access_token 是否为空
-        if(StringUtils.isBlank(access_token)){
-            return handleException.writeError(exchange,"请登录");
+        if (StringUtils.isBlank(access_token)) {
+            return handleException.writeError(exchange, "请登录");
         }
 
         //校验token是否有效
@@ -66,16 +67,16 @@ public class AuthGlobalFilter implements GlobalFilter,Ordered {
             //发送远程请求，验证token
             ResponseEntity<String> entity = restTemplate.getForEntity(checkTokenUrl, String.class);
             //token 无效的业务逻辑处理
-            if(entity.getStatusCode() != HttpStatus.OK){
+            if (entity.getStatusCode() != HttpStatus.OK) {
                 return handleException.writeError(exchange,
                         "Token was not recognised, token: ".concat(access_token));
             }
-            if(StringUtils.isBlank(entity.getBody())){
+            if (StringUtils.isBlank(entity.getBody())) {
                 return handleException.writeError(exchange,
                         "This token is invalid: ".concat(access_token));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return handleException.writeError(exchange,
                     "Token was not recognised, token: ".concat(access_token));
         }
@@ -86,6 +87,7 @@ public class AuthGlobalFilter implements GlobalFilter,Ordered {
 
     /**
      * 网关过滤器的排序，数字越小优先级越高
+     *
      * @return
      */
     @Override

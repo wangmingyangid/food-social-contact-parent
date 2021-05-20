@@ -8,6 +8,7 @@ import org.wmy.commons.base.BaseModel;
  * @author wmy
  * @create 2020-11-24 19:12
  */
+
 /**
  * 食客实体类
  */
@@ -31,5 +32,6 @@ public class Diners extends BaseModel {
     private String avatarUrl;
     // 角色
     private String roles;
+
 
 }

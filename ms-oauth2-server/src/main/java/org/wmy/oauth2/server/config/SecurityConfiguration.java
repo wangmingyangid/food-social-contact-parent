@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 /**
  * @author wmy
  * @create 2020-11-23 20:45
- *
+ * <p>
  * security 配置类
  */
 
@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     //初始化RedisTokenStore 用于将token 存储至Redis
     @Bean
-    public RedisTokenStore redisTokenStore(){
+    public RedisTokenStore redisTokenStore() {
         RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
         redisTokenStore.setPrefix("TOKEN:");//设置key的层级前缀，方便查询
         return redisTokenStore;
@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     //初始化密码管理器Md5加密
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new PasswordEncoder() {
             /**
              * 加密
@@ -79,7 +79,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 //放行的请求
-                .antMatchers("/oauth/**","/actuator/**").permitAll()
+                .antMatchers("/oauth/**", "/actuator/**").permitAll()
                 .and()
                 .authorizeRequests()
                 //其它请求必须认证才能访问

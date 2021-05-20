@@ -13,6 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("org.wmy.diners.mapper")
 public class DinersApplication {
     public static void main(String[] args) {
-        SpringApplication.run(DinersApplication.class,args);
+        SpringApplication.run(DinersApplication.class, args);
     }
 }

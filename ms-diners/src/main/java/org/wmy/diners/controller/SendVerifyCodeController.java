@@ -24,12 +24,13 @@ public class SendVerifyCodeController {
 
     /**
      * 发送验证码
+     *
      * @param phone
      * @return
      */
     @GetMapping("send")
-    public ResultInfo send(String phone){
+    public ResultInfo send(String phone) {
         sendVerifyCodeService.send(phone);
-        return ResultInfoUtil.buildSuccess(request.getServletPath(),"发送成功");
+        return ResultInfoUtil.buildSuccess(request.getServletPath(), "发送成功");
     }
 }

@@ -32,28 +32,28 @@ public class UserController {
 
     /**
      * 获取当前登录对象的信息：前端要传递token过来，有两种方式传递
+     *
      * @param authentication
      * @return
      */
     @GetMapping("user/me")
-    public ResultInfo getCurrentUser(Authentication authentication){
+    public ResultInfo getCurrentUser(Authentication authentication) {
         //获取登录用户的信息然后设置
         SignInIdentity signInIdentity = (SignInIdentity) authentication.getPrincipal();
         //转为前端可用的视图对象
         SignInDinerInfo dinerInfo = new SignInDinerInfo();
-        BeanUtils.copyProperties(signInIdentity,dinerInfo);
+        BeanUtils.copyProperties(signInIdentity, dinerInfo);
 
-        return ResultInfoUtil.buildSuccess(request.getServletPath(),dinerInfo);
+        return ResultInfoUtil.buildSuccess(request.getServletPath(), dinerInfo);
     }
 
     /**
-     *
-     * @param access_token      前端通过带参传递
-     * @param authorization     前端通过authorization传递过来
+     * @param access_token  前端通过带参传递
+     * @param authorization 前端通过authorization传递过来
      * @return
      */
     @GetMapping("user/logout")
-    public ResultInfo logout(String access_token,String authorization){
+    public ResultInfo logout(String access_token, String authorization) {
         // 判断 access_token 是否为空，为空将 authorization 赋值给 access_token
         if (StringUtils.isBlank(access_token)) {
             access_token = authorization;

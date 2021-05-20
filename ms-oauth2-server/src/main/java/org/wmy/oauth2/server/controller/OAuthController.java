@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * Oauth2 控制器
- *
+ * <p>
  * 自定义控制器：使得可以自定义访问http://localhost:8082/oauth/token 生成的字段
  */
 @RestController

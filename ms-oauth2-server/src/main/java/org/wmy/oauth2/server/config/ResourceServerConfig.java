@@ -10,6 +10,9 @@ import javax.annotation.Resource;
 
 /**
  * 资源服务
+ * <p>
+ * 授权服务器和资源服务器可以是同一台服务器，也可以是不同服务器
+ * 通过不同的配置开启授权服务器和资源服务器。
  */
 @Configuration
 @EnableResourceServer

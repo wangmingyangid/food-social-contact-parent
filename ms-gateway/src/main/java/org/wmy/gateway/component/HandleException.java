@@ -38,7 +38,7 @@ public class HandleException {
         DataBuffer buffer = null;
         try {
             resultInfoJson = objectMapper.writeValueAsString(resultInfo);
-            buffer =  response.bufferFactory().wrap(resultInfoJson.getBytes(Charset.forName("UTF-8")));
+            buffer = response.bufferFactory().wrap(resultInfoJson.getBytes(Charset.forName("UTF-8")));
         } catch (JsonProcessingException ex) {
             ex.printStackTrace();
         }

@@ -35,7 +35,8 @@ public class RedisLock {
 
     /**
      * 获取锁
-     * @param lockName 锁名称
+     *
+     * @param lockName    锁名称
      * @param releaseTime 超时时间(单位:秒)
      * @return key 解锁标识
      */
@@ -44,22 +45,24 @@ public class RedisLock {
         String key = UUID.randomUUID().toString();
 
         // 执行脚本
-        Long result = (Long)redisTemplate.execute(
+        Long result = (Long) redisTemplate.execute(
                 lockScript,
                 Collections.singletonList(lockName),
                 key + Thread.currentThread().getId(), releaseTime);
 
         // 判断结果
-        if(result != null && result.intValue() == 1) {
+        if (result != null && result.intValue() == 1) {
             return key;
-        }else {
+        } else {
             return null;
         }
     }
+
     /**
      * 释放锁
+     *
      * @param lockName 锁名称
-     * @param key 解锁标识
+     * @param key      解锁标识
      */
     public void unlock(String lockName, String key) {
         // 执行脚本

@@ -16,6 +16,10 @@
         <module>commons</module>
         <module>ms-oauth2-server</module>
         <module>ms-seckill</module>
+        <module>ms-follow</module>
+        <module>ms-feeds</module>
+        <module>ms-points</module>
+        <module>ms-restaurants</module>
     </modules>
 
 

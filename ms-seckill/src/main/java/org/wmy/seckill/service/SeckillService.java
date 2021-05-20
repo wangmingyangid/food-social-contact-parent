@@ -1,7 +1,6 @@
 package org.wmy.seckill.service;
 
 
-
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
@@ -37,10 +36,8 @@ public class SeckillService {
 
     @Resource
     private SeckillVouchersMapper seckillVouchersMapper;
-
     @Resource
     private VoucherOrdersMapper voucherOrdersMapper;
-
     @Value("${service.name.ms-oauth-server}")
     private String oauthServerName;
     @Resource
@@ -53,12 +50,11 @@ public class SeckillService {
     private RedisLock redisLock;
 
 
-
     /**
      * 抢购代金券
-     *
+     * <p>
      * 不通过事务的情况下，要判断库存在先，下单在后
-     *
+     * <p>
      * 通过事务控制时，下单可以在前
      *
      * @param voucherId   代金券 ID
@@ -73,9 +69,9 @@ public class SeckillService {
         AssertUtil.isNotEmpty(accessToken, "请登录");
 
         //采用redis
-        String key = RedisKeyConstant.seckill_vouchers.getKey()+voucherId;
-        Map<String,Object> map = redisTemplate.opsForHash().entries(key);
-        AssertUtil.isTrue(map.isEmpty(),"该代金券并未有抢购活动");
+        String key = RedisKeyConstant.seckill_vouchers.getKey() + voucherId;
+        Map<String, Object> map = redisTemplate.opsForHash().entries(key);
+        AssertUtil.isTrue(map.isEmpty(), "该代金券并未有抢购活动");
         SeckillVouchers seckillVouchers = BeanUtil.mapToBean(map, SeckillVouchers.class, true, null);
 
 
@@ -102,13 +98,13 @@ public class SeckillService {
 
 
         //使用redis锁一个账号只能购买一次
-        String lockName = RedisKeyConstant.lock_key.getKey()+dinerInfo.getId()+":"+voucherId;
+        String lockName = RedisKeyConstant.lock_key.getKey() + dinerInfo.getId() + ":" + voucherId;
         long expireTime = seckillVouchers.getEndTime().getTime() - now.getTime();
         String lockKey = redisLock.tryLock(lockName, expireTime);
 
         try {
             //不为空意味着拿到锁了，可以下单
-            if(StrUtil.isNotBlank(lockKey)){
+            if (StrUtil.isNotBlank(lockKey)) {
                 // 下单
                 VoucherOrders voucherOrders = new VoucherOrders();
                 voucherOrders.setFkDinerId(dinerInfo.getId());
@@ -126,16 +122,16 @@ public class SeckillService {
                 keys.add(key);
                 keys.add("amount");
                 Long amount = (Long) redisTemplate.execute(defaultRedisScript, keys);
-                AssertUtil.isTrue(amount == null || amount <1 ,"该劵已经卖完了");
+                AssertUtil.isTrue(amount == null || amount < 1, "该劵已经卖完了");
             }
 
-        }catch (Exception e){
-            //手动回滚事务
+        } catch (Exception e) {
+            //手动回滚事务（因为异常被捕获了）
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             //解锁
-            redisLock.unlock(lockName,lockKey);
-            if(e instanceof ParameterException){
-                return ResultInfoUtil.buildError(0,"该劵已经卖完了",path);
+            redisLock.unlock(lockName, lockKey);
+            if (e instanceof ParameterException) {
+                return ResultInfoUtil.buildError(0, "该劵已经卖完了", path);
             }
         }
 
@@ -144,18 +140,18 @@ public class SeckillService {
 
     /**
      * 未实现一人一单
-     *
+     * <p>
      * 抢购代金券
-     *
+     * <p>
      * 不通过事务的情况下，要判断库存在先，下单在后
-     *
+     * <p>
      * 通过事务控制时，下单可以在前
      *
      * @param voucherId   代金券 ID
      * @param accessToken 登录token
      * @Para path 访问路径
      */
-   /* public ResultInfo doSeckill1(Integer voucherId, String accessToken, String path) {
+    public ResultInfo doSeckill1(Integer voucherId, String accessToken, String path) {
         // 基本参数校验
         AssertUtil.isTrue(voucherId == null || voucherId < 0, "请选择需要抢购的代金券");
         AssertUtil.isNotEmpty(accessToken, "请登录");
@@ -168,9 +164,9 @@ public class SeckillService {
         //AssertUtil.isTrue(seckillVouchers.getIsValid() == 0, "该活动已结束");
 
         //采用redis
-        String key = RedisKeyConstant.seckill_vouchers.getKey()+voucherId;
-        Map<String,Object> map = redisTemplate.opsForHash().entries(key);
-        AssertUtil.isTrue(map.isEmpty(),"该代金券并未有抢购活动");
+        String key = RedisKeyConstant.seckill_vouchers.getKey() + voucherId;
+        Map<String, Object> map = redisTemplate.opsForHash().entries(key);
+        AssertUtil.isTrue(map.isEmpty(), "该代金券并未有抢购活动");
         SeckillVouchers seckillVouchers = BeanUtil.mapToBean(map, SeckillVouchers.class, true, null);
 
 
@@ -212,7 +208,7 @@ public class SeckillService {
         keys.add(key);
         keys.add("amount");
         Long amount = (Long) redisTemplate.execute(defaultRedisScript, keys);
-        AssertUtil.isTrue(amount == null || amount <1 ,"该劵已经卖完了");
+        AssertUtil.isTrue(amount == null || amount < 1, "该劵已经卖完了");
 
 
         // 下单
@@ -229,9 +225,7 @@ public class SeckillService {
         AssertUtil.isTrue(count == 0, "用户抢购失败");
 
         return ResultInfoUtil.buildSuccess(path, "抢购成功");
-    }*/
-
-
+    }
 
 
     /**
@@ -263,15 +257,15 @@ public class SeckillService {
         String key = RedisKeyConstant.seckill_vouchers.getKey() +
                 seckillVouchers.getFkVoucherId();
         //验证redis中是否存在该劵的秒杀活动(用hash不涉及序列化；操作比较快)
-        Map<String,Object> map = redisTemplate.opsForHash().entries(key);
-        AssertUtil.isTrue(!CollectionUtils.isEmpty(map) && (int)map.get("amount") > 0,"该劵已拥有抢购活动");
+        Map<String, Object> map = redisTemplate.opsForHash().entries(key);
+        AssertUtil.isTrue(!CollectionUtils.isEmpty(map) && (int) map.get("amount") > 0, "该劵已拥有抢购活动");
         //插入redis
         seckillVouchers.setIsValid(1);
         seckillVouchers.setCreateDate(now);
         seckillVouchers.setUpdateDate(now);
 
-        redisTemplate.opsForHash().putAll(key,BeanUtil.beanToMap(seckillVouchers));
-        
+        redisTemplate.opsForHash().putAll(key, BeanUtil.beanToMap(seckillVouchers));
+
     }
 
 }
