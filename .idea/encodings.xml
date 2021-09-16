@@ -3,14 +3,34 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/commons" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/commons/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-diners" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-diners/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-diners/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-feeds" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-feeds/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-feeds/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-follow" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-follow/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-follow/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-gateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-oauth2-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-oauth2-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-oauth2-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-points" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-points/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-points/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-registry" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-registry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-registry/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-restaurants" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-restaurants/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-restaurants/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-seckill" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-seckill/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-seckill/src/main/resources" charset="UTF-8" />
   </component>
 </project>

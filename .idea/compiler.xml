@@ -7,16 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="commons" />
-        <module name="ms-diners" />
-        <module name="ms-feeds" />
-        <module name="ms-follow" />
-        <module name="ms-gateway" />
-        <module name="ms-oauth2-server" />
         <module name="ms-points" />
         <module name="ms-registry" />
-        <module name="ms-restaurants" />
+        <module name="ms-diners" />
+        <module name="ms-follow" />
+        <module name="ms-oauth2-server" />
         <module name="ms-seckill" />
+        <module name="ms-restaurants" />
+        <module name="ms-feeds" />
+        <module name="commons" />
+        <module name="ms-gateway" />
       </profile>
     </annotationProcessing>
   </component>
